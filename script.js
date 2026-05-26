@@ -1,110 +1,99 @@
-const todoInput = document.querySelector("#todoInput");
-const addBtn = document.querySelector("#addBtn");
-const todoList = document.querySelector("#todoList");
-
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
 
-function renderTodo() {
+showList();
 
-  todoList.innerHTML = "";
+function addTodo() {
 
-  todos.forEach((todo, index) => {
+  let input = document.querySelector("#todoInput");
+  let text = input.value.trim();
 
-    const li = document.createElement("li");
-
-    if(todo.completed){
-      li.classList.add("completed");
-    }
-
-    const span = document.createElement("span");
-    span.innerText = todo.text;
-
-    const btnGroup = document.createElement("div");
-    btnGroup.classList.add("btn-group");
-
-    const completeBtn = document.createElement("button");
-    completeBtn.innerText = "완료";
-    completeBtn.classList.add("completeBtn");
-
-    completeBtn.onclick = () => {
-      todos[index].completed = !todos[index].completed;
-      saveTodo();
-      renderTodo();
-    };
-
-    const editBtn = document.createElement("button");
-    editBtn.innerText = "수정";
-    editBtn.classList.add("editBtn");
-
-    editBtn.onclick = () => {
-
-      const newText = prompt("수정할 내용 입력", todo.text);
-
-      if(newText !== null && newText.trim() !== ""){
-        todos[index].text = newText;
-        saveTodo();
-        renderTodo();
-      }
-    };
-
-    const deleteBtn = document.createElement("button");
-    deleteBtn.innerText = "삭제";
-    deleteBtn.classList.add("deleteBtn");
-
-    deleteBtn.onclick = () => {
-      todos.splice(index, 1);
-      saveTodo();
-      renderTodo();
-    };
-
-    btnGroup.appendChild(completeBtn);
-    btnGroup.appendChild(editBtn);
-    btnGroup.appendChild(deleteBtn);
-
-    li.appendChild(span);
-    li.appendChild(btnGroup);
-
-    todoList.appendChild(li);
-
-  });
-
-}
-
-function saveTodo(){
-  localStorage.setItem("todos", JSON.stringify(todos));
-}
-
-function addTodo(){
-
-  const text = todoInput.value.trim();
-
-  if(text === ""){
-    alert("할 일을 입력하세요.");
+  if(text == ""){
+    alert("할 일을 입력하세요");
     return;
   }
 
-  const todoObj = {
-    text:text,
-    completed:false
+  let todo = {
+    text : text,
+    completed : false
   };
 
-  todos.push(todoObj);
+  todos.push(todo);
 
-  saveTodo();
-  renderTodo();
+  localStorage.setItem("todos", JSON.stringify(todos));
 
-  todoInput.value = "";
+  input.value = "";
 
+  showList();
 }
 
-addBtn.onclick = addTodo;
+function doneTodo(i){
 
-todoInput.addEventListener("keydown", function(e){
+  todos[i].completed = !todos[i].completed;
 
-  if(e.key === "Enter"){
+  localStorage.setItem("todos", JSON.stringify(todos));
+
+  showList();
+}
+
+function editTodo(i){
+
+  let newText = prompt("수정할 내용 입력", todos[i].text);
+
+  if(newText != null && newText.trim() != ""){
+
+    todos[i].text = newText;
+
+    localStorage.setItem("todos", JSON.stringify(todos));
+
+    showList();
+  }
+}
+
+function deleteTodo(i){
+
+  todos.splice(i, 1);
+
+  localStorage.setItem("todos", JSON.stringify(todos));
+
+  showList();
+}
+
+function showList(){
+
+  let list = document.querySelector("#todoList");
+
+  let html = "";
+
+  for(let i = 0; i < todos.length; i++){
+
+    let doneClass = "";
+
+    if(todos[i].completed){
+      doneClass = "completed";
+    }
+
+    html += `
+      <li class="${doneClass}">
+        ${todos[i].text}
+
+        <button onclick="doneTodo(${i})">완료</button>
+
+        <button onclick="editTodo(${i})">수정</button>
+
+        <button onclick="deleteTodo(${i})">삭제</button>
+      </li>
+    `;
+  }
+
+  list.innerHTML = html;
+}
+
+document.querySelector("#addBtn").onclick = addTodo;
+
+document.querySelector("#todoInput").onkeydown = function(e){
+
+  if(e.key == "Enter"){
     addTodo();
   }
 
-});
-
-renderTodo();
+};
