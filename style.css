@@ -1,94 +1,89 @@
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body{
-  background:#f4f4f4;
-  font-family:Arial, sans-serif;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  margin:0;
+  background: #ececec;
+  font-family: Arial, sans-serif;
 }
 
 .container{
-  width:400px;
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 0 10px rgba(0,0,0,0.2);
+  width: 450px;
+  margin: 70px auto;
+  background: white;
+  padding: 30px 20px;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
 }
 
 h1{
-  text-align:center;
-  margin-bottom:20px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 45px;
 }
 
 .input-area{
-  display:flex;
-  gap:10px;
-  margin-bottom:20px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 #todoInput{
-  flex:1;
-  padding:10px;
-  font-size:16px;
+  flex: 1;
+  padding: 12px;
+  font-size: 18px;
+  border: 1px solid gray;
 }
 
 #addBtn{
-  padding:10px 15px;
-  border:none;
-  background:#4caf50;
-  color:white;
-  cursor:pointer;
-  border-radius:5px;
+  width: 60px;
+  border: none;
+  background: #4caf50;
+  color: white;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-#addBtn:hover{
-  background:#45a049;
+#todoList{
+  list-style: none;
 }
 
-ul{
-  list-style:none;
-}
+#todoList li{
+  background: #f1f1f1;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 6px;
 
-li{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:#eee;
-  padding:10px;
-  margin-bottom:10px;
-  border-radius:5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .completed{
-  text-decoration:line-through;
-  color:gray;
-  background:#d9ffd9;
+  background: #dff5dd !important;
+  text-decoration: line-through;
+  color: gray;
 }
 
-.btn-group button{
-  margin-left:5px;
-  border:none;
-  padding:5px 8px;
-  cursor:pointer;
-  border-radius:4px;
-  color:white;
+button{
+  border: none;
+  padding: 7px 10px;
+  color: white;
+  border-radius: 1px;
+  cursor: pointer;
 }
 
-.completeBtn{
-  background:#2196f3;
+button:nth-child(1){
+  background: #2196f3;
 }
 
-.editBtn{
-  background:#ff9800;
+button:nth-child(2){
+  background: orange;
 }
 
-.deleteBtn{
-  background:#f44336;
-}
+button:nth-child(3){
+  background: #f44336;
+} 
