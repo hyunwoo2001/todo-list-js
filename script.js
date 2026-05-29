@@ -2,7 +2,7 @@
 
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
 
-// 페이지 로드되자마자 화면에 리스트 출력
+// 화면에 리스트 출력
 showList();
 
 
