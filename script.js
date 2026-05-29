@@ -24,7 +24,7 @@ function addTodo() {
   // 새로운 할 일 객체 생성
   let todo = {
     text : text,        // 할 일 내용
-    completed : false   // 완료 여부 (기본 false)
+    completed : false   // 완료 여부
   };
 
   // 배열에 추가
