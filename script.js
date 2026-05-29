@@ -44,7 +44,7 @@ function addTodo() {
 // 완료 토글 함수
 function doneTodo(i){
 
-  // 해당 항목의 completed 값을 true ↔ false로 변경
+  // 해당 항목의 completed값 변경
   todos[i].completed = !todos[i].completed;
 
   // 저장
